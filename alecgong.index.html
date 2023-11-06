@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clicker Game with Power-Up</title>
+</head>
+<body>
+    <h1>Clicker Game</h1>
+    <p>Click the button to increase your score:</p>
+    <button id="clickButton">Click Me</button>
+    <p>Score: <span id="score">0</span></p>
+    <button id="powerUpButton">Power Up (Cost: 10)</button>
+    <p>Power Ups: <span id="powerUps">0</span></p>
+
+    <script>
+        let score = 0;
+        let powerUps = 0;
+        let powerUpCost = 10;
+
+        const clickButton = document.getElementById('clickButton');
+        const powerUpButton = document.getElementById('powerUpButton');
+        const scoreDisplay = document.getElementById('score');
+        const powerUpsDisplay = document.getElementById('powerUps');
+
+        clickButton.addEventListener('click', () => {
+            score++;
+            updateScore();
+        });
+
+        powerUpButton.addEventListener('click', () => {
+            if (score >= powerUpCost) {
+                score -= powerUpCost;
+                powerUps++;
+                powerUpCost *= 2;
+                updateScore();
+                updatePowerUps();
+            } else {
+                alert("Not enough score to purchase a power-up!");
+            }
+        });
+
+        function updateScore() {
+            scoreDisplay.textContent = score;
+        }
+
+        function updatePowerUps() {
+            powerUpsDisplay.textContent = powerUps;
+            powerUpButton.textContent = `Power Up (Cost: ${powerUpCost})`;
+        }
+    </script>
+</body>
+</html>
